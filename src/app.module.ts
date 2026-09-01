@@ -6,6 +6,12 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { TenderMasterModule } from './tender-master/tender-master.module';
+import { FdrMasterModule } from './fdr-master/fdr-master.module';
+import { BankMasterModule } from './masterdatamodules/bank-master/bank-master.module';
+import { FdrStatusMasterModule } from './masterdatamodules/fdr-status-master/fdr-status-master.module';
+import { PledgeNameMasterModule } from './masterdatamodules/pledge-name-master/pledge-name-master.module';
+import { CompanyMasterModule } from './masterdatamodules/company-master/company-master.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -18,7 +24,14 @@ import { AuthModule } from './auth/auth.module';
       synchronize:true
     }),
     UsersModule,
-    AuthModule],
+    AuthModule,
+    TenderMasterModule,
+    FdrMasterModule,
+    FdrStatusMasterModule,
+    BankMasterModule,
+    PledgeNameMasterModule,
+    CompanyMasterModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

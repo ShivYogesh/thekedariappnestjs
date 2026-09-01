@@ -2,11 +2,12 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@n
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/creat-user.dto';
 import { AppService } from 'src/app.service';
-import { User } from './user.entity';
+import { user_master } from './user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import path from 'path';
 
-@Controller('users')
+@Controller('user-master')
 export class UsersController {
     constructor(
         private readonly userServices:UsersService){}//constructor()
@@ -21,23 +22,21 @@ export class UsersController {
     }//getById()
     
     @Post()
-    async creat(@Body() body:CreateUserDto):Promise<User> {
+    async creat(@Body() body:CreateUserDto):Promise<user_master> {
         return this.userServices.create(body);
 
     }//create()
     
-    /*
-    @Post()
-    async creat(@Body() body:Partial<User>):Promise<User> {
-        return this.userServices.create(body);
-
-    }//create()
-    */
+    
     @Patch(':id')
-    async update(@Param('id') id:string,@Body() body:UpdateUserDto):Promise<User | null> {
+    async update(@Param('id') id:string,@Body() body:UpdateUserDto):Promise<user_master | null> {
         return this.userServices.update(Number(id),body);
 
-    }//create()
+    }//update()
+    @Patch('changepassword/:id')
+    async changePassword(@Param('id') id:string,@Body('oldPassword') oldPassword:string,@Body('newPassword') newPassword:string){
+         return this.userServices.changePassword(Number(id),oldPassword,newPassword);
+    }//changepassword()
     @Delete(':id')
     async delete(@Param('id') _id:string){
         return this.userServices.remove(Number(_id));

@@ -2,7 +2,7 @@ import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString } from "class-vali
 
 // src/users/dto/create.dto.ts
 export class UpdateUserDto {
-  @IsString()
+   @IsString()
      @IsOptional()
       userName!: string ;
       @IsEmail()

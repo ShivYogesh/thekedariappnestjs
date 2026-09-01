@@ -1,6 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Unique, DeleteDateColumn } from "typeorm";
+import { Entity,
+     PrimaryGeneratedColumn,
+      Column, CreateDateColumn,
+       UpdateDateColumn, 
+       Unique,
+        DeleteDateColumn } from "typeorm";
 @Entity()
-export class User {
+export class user_master {
     @PrimaryGeneratedColumn()
     id: number = 0;
     @Column({ unique: true }) // 👈 Makes username unique

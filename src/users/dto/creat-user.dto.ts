@@ -4,34 +4,34 @@ import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString } from "class-vali
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
-    userName!: string ;
-    @IsEmail()
-  email!: string ;
+  userName!: string;
+  @IsEmail()
+  email!: string;
   @IsString()
   @IsNotEmpty()
-  mobileNo!:string;
+  mobileNo!: string;
   @IsString()
   @IsNotEmpty()
-  password!:string;
+  password!: string;
   @IsString()
   @IsNotEmpty()
-  role!:string;
+  role!: string;
   @IsString()
-  @IsNotEmpty()
-  profileImgPath!:string;
-  @IsBoolean()
-  @IsNotEmpty()
-  isemailAuthenticated!:boolean;
-  @IsBoolean()
-  @IsNotEmpty()
-  isMobileAuthenticated!:boolean;
-  @IsBoolean()
-  @IsNotEmpty()
-  isActive!:boolean;
   @IsOptional()
-  createdBy?:string;
+  profileImgPath!: string;
+  @IsBoolean()
+  @IsNotEmpty()
+  isemailAuthenticated!: boolean;
+  @IsBoolean()
+  @IsNotEmpty()
+  isMobileAuthenticated!: boolean;
+  @IsBoolean()
+  @IsNotEmpty()
+  isActive!: boolean;
   @IsOptional()
-  updatedBy?:string;
-  
+  createdBy?: string;
+  @IsOptional()
+  updatedBy?: string;
+
 
 }
