@@ -15,6 +15,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: any) {
     // Whatever is returned here is automatically appended to the Request object as req.user
-    return { userId: payload.sub, username: payload.userName,profileImgPath:payload.profileImgPath };
+    return { userId: payload.sub,
+       username: payload.userName,
+       role:payload.role,
+       profileImgPath:payload.profileImgPath 
+      };
   }
 }

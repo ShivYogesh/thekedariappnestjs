@@ -7,18 +7,18 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class TenderMasterService {
- constructor(
-   @InjectRepository(TenderMaster)
-        private tenderMasterRepository: Repository<TenderMaster>
- ){}//counstructor
+  constructor(
+    @InjectRepository(TenderMaster)
+    private tenderMasterRepository: Repository<TenderMaster>
+  ) { }//counstructor
   async create(createTenderMasterDto: CreateTenderMasterDto) {
     try {
-      // 1. Instantiate the entity mapping the DTO data
-      const newRecord = await this.tenderMasterRepository.create(createTenderMasterDto);
-    // 2. Persist the instantiated entity to the database
-    const savedRecord = await this.tenderMasterRepository.save(newRecord);
-    return   savedRecord;
-    //return await this.fdrMasterRepository.save(createFdrMasterDto);
+      // 1. Map/assign the DTO to a proper entity instance first
+      const newRecord = this.tenderMasterRepository.create(createTenderMasterDto);
+      // 2. Save the instance
+      const savedRecord=await this.tenderMasterRepository.save(newRecord);
+      return savedRecord;
+      //return await this.fdrMasterRepository.save(createFdrMasterDto);
     } catch (error) {
       throw error;
     }
@@ -26,8 +26,8 @@ export class TenderMasterService {
 
   async findAll() {
     try {
-     return this.tenderMasterRepository.find();
-  } catch (error) {
+      return this.tenderMasterRepository.find();
+    } catch (error) {
       throw error;
     }
   }

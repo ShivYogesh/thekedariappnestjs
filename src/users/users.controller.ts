@@ -6,13 +6,17 @@ import { user_master } from './user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import path from 'path';
+import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
+import { Roles } from 'src/auth/guards/roles.decorator';
+import { Role } from 'src/auth/guards/role.enum';
 
 @Controller('user-master')
 export class UsersController {
     constructor(
         private readonly userServices:UsersService){}//constructor()
-     @UseGuards(JwtAuthGuard) // 👈 This route now requires a valid Bearer token
+     @UseGuards(JwtAuthGuard,RolesGuard) // 👈 This route now requires a valid Bearer token
         @Get()
+        @Roles(Role.SuperAdmin) // Only accessible if user.roles contains 'admin'
     getAll(){
         return this.userServices.findAll();
     }//getAll

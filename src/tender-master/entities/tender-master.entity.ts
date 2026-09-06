@@ -1,4 +1,7 @@
 import { CompanyMaster } from "src/masterdatamodules/company-master/entities/company-master.entity";
+import { DepartmentMaster } from "src/masterdatamodules/department-master/entities/department-master.entity";
+import { FundMaster } from "src/masterdatamodules/fund-master/entities/fund-master.entity";
+import { TenderGroupMaster } from "src/masterdatamodules/tender-group-master/entities/tender-group-master.entity";
 import {
     Column,
     CreateDateColumn,
@@ -28,51 +31,14 @@ export class TenderMaster {
     totalAmount!:number ;
     @Column()
     companyId!:number;  //master
+    @Column({ nullable: true }) // <-- Added nullable: true
+    tenderGroupId!:number | null; // <-- Changed type to allow null
     @Column()
-    tenderGroup!:string;    // master
+    fundId!:number;    // master
     @Column()
-    fund!:string;    // master
-    @Column()
-    department!:string;    // master
+    departmentId!:number;    // master
    
    
-    // =======================================================
-    // 1. BANK RELATIONSHIP (String Primary Key Match)
-    // =======================================================
-    /*
-    @Column()
-    bankName!: string;
-    @ManyToOne(() => BankMaster, { onDelete: "RESTRICT", onUpdate: "CASCADE" })
-    @JoinColumn({ name: "bankName", referencedColumnName: "bankName" })
-    bank!: BankMaster;
-    // =======================================================
-    // 1. FDR STATUS RELATIONSHIP (String Primary Key Match)
-    // =======================================================
-    @Column()
-    fdrStatus!: string;
-    @ManyToOne(() => FdrStatusMaster, { onDelete: "RESTRICT", onUpdate: "CASCADE" })
-    @JoinColumn({ name: "fdrStatus", referencedColumnName: "fdrStatusName" })
-    status!: FdrStatusMaster;
-    // =======================================================
-    // 1. BANK RELATIONSHIP (String Primary Key Match)
-    // =======================================================
-    @Column()
-    pledgeName!: string;
-
-    @ManyToOne(() => PledgeNameMaster, { onDelete: "RESTRICT", onUpdate: "CASCADE" })
-    @JoinColumn({ name: "pledgeName", referencedColumnName: "pledgeName" })
-    pledgeTo!: PledgeNameMaster;
-
-    // =======================================================
-    // 2. COMPANY RELATIONSHIP (Auto-generated Numeric ID Match)
-    // =======================================================
-    @Column()
-    companyId!: number; // Stores the numeric ID pointing to CompanyMaster
-*/
-    @ManyToOne(() => CompanyMaster, { onDelete: "RESTRICT" })
-    @JoinColumn({ name: "companyId" }) // Defaults to target "id" column in CompanyMaster
-    company!: CompanyMaster;
-
     // =======================================================
     // TIMESTAMPS and comman fileds
     // =======================================================
@@ -86,4 +52,25 @@ export class TenderMaster {
     updatedAt!: Date;
     @DeleteDateColumn()
     deletedAt!: Date;
+
+    /* **************************************************** */
+    /* *******  All Relation  **************************** */
+    /* *************************************************** */
+    
+    @ManyToOne(() => CompanyMaster, { onDelete: "RESTRICT" })
+    @JoinColumn({ name: "companyId" }) // Defaults to target "id" column in CompanyMaster
+    company!: CompanyMaster;
+
+     @ManyToOne(() => TenderGroupMaster, { onDelete: "RESTRICT", nullable: true })
+    @JoinColumn({ name: "tenderGroupId" }) // Defaults to target "id" column in CompanyMaster
+    tenderGroup!:  TenderGroupMaster | null; // <-- type to allow null
+
+         @ManyToOne(() => FundMaster, { onDelete: "RESTRICT" })
+    @JoinColumn({ name: "fundId" }) // Defaults to target "id" column in CompanyMaster
+    fund!: FundMaster;
+
+     @ManyToOne(() => DepartmentMaster, { onDelete: "RESTRICT" })
+    @JoinColumn({ name: "departmentId" }) // Defaults to target "id" column in CompanyMaster
+    department!: DepartmentMaster;    
+
 }
