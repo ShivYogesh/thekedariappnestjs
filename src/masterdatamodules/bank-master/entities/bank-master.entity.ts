@@ -1,5 +1,5 @@
 import { FdrMaster } from "src/fdr-master/entities/fdr-master.entity";
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Unique, DeleteDateColumn, PrimaryColumn, OneToMany } from "typeorm";
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, Unique, DeleteDateColumn, PrimaryColumn, OneToMany } from "typeorm";
 @Entity()
 export class BankMaster {
     @PrimaryColumn()

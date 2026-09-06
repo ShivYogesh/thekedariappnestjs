@@ -18,8 +18,8 @@ export class BankMasterController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.bankMasterService.findOne(+id);
+  findOne(@Param('name') name: string) {
+    return this.bankMasterService.findOne(name);
   }
 
   @Patch(':id')

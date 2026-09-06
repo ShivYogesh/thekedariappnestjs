@@ -5,7 +5,7 @@ export class CompanyMaster {
     @PrimaryGeneratedColumn()
     id: number = 0;
     @Column({ unique: true }) // 👈 Makes company name unique
-    companyName!: string ;
+    name!: string ;
     @Column({ type: 'varchar', nullable: true })
     address!:string;
     @Column({unique:true, type: 'varchar', nullable: true }) // 👈 Makes company GST No  unique

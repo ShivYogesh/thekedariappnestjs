@@ -1,20 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CompanyMasterService } from './company-master.service';
 import { CreateCompanyMasterDto } from './dto/create-company-master.dto';
 import { UpdateCompanyMasterDto } from './dto/update-company-master.dto';
+import { SearchCompanyMasterDto } from './dto/search-company-master.dto';
 
 @Controller('company-master')
 export class CompanyMasterController {
-  constructor(private readonly companyMasterService: CompanyMasterService) {}
+  constructor(private readonly companyMasterService: CompanyMasterService) { }
 
   @Post()
- async create(@Body() createCompanyMasterDto: CreateCompanyMasterDto) {
+  async create(@Body() createCompanyMasterDto: CreateCompanyMasterDto) {
     return await this.companyMasterService.create(createCompanyMasterDto);
   }
 
   @Get()
-  async findAll() {
-    return await this.companyMasterService.findAll();
+  async findAll(@Query() query: SearchCompanyMasterDto) {
+    return await this.companyMasterService.findAll(query);
   }
 
   @Get(':id')

@@ -4,6 +4,7 @@ import { UpdateCompanyMasterDto } from './dto/update-company-master.dto';
 import { CompanyMaster } from './entities/company-master.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { SearchCompanyMasterDto } from './dto/search-company-master.dto';
 
 @Injectable()
 export class CompanyMasterService {
@@ -18,8 +19,9 @@ export class CompanyMasterService {
     }
   }//create()
 
- async findAll():Promise<CompanyMaster[]> {
-    return await this.companyMasterRepository.find({relations:{fdrs:true}});
+ async findAll(query: SearchCompanyMasterDto):Promise<CompanyMaster[]> {
+    
+  return await this.companyMasterRepository.find({relations:{fdrs:query.includeFdrs}});
   }
 
   findOne(id: number) {

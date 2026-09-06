@@ -3,7 +3,7 @@ import { IsNotEmpty, IsOptional, IsString } from "class-validator";
 export class CreateCompanyMasterDto {
     @IsString()
     @IsNotEmpty()
-    companyName!: string;
+    name!: string;
     @IsString()
     @IsOptional()
     address?: string;

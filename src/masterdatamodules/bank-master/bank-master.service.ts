@@ -20,8 +20,8 @@ export class BankMasterService {
   async findAll(): Promise<BankMaster[]> {
       return await this.bankRepository.find({relations:{fdrs:true}});
     }//findAll()
-  findOne(id: number) {
-    return `This action returns a #${id} bankMaster`;
+  async findOne(name: string) {
+    return await this.bankRepository.findOneBy({bankName:name});
   }
 
   update(id: number, updateBankMasterDto: UpdateBankMasterDto) {
