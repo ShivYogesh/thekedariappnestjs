@@ -21,7 +21,7 @@ export class CreateTenderMasterDto {
     @IsOptional()
     fund!: string;
     @IsOptional()
-    departmentId!: number;
+    department!: string;
     @IsOptional()
     createdBy?: string;
     @IsOptional()

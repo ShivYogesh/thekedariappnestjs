@@ -1,10 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { TypeOrmExceptionFilter } from './filters/typeorm-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
    // 👇 ADD THIS LINE RIGHT HERE 👇
+   // Apply the database filter globally
+  app.useGlobalFilters(new TypeOrmExceptionFilter());
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalPipes(new ValidationPipe({
   whitelist: true, // Strips away properties that don't have decorators in the DTO

@@ -16,6 +16,7 @@ export class UsersController {
     getAll(){
         return this.userServices.findAll();
     }//getAll
+    @UseGuards(JwtAuthGuard) // 👈 This route now requires a valid Bearer token
     @Get(':id')
     getById(@Param('id') _id:string){
         return this.userServices.findOne(Number(_id));
@@ -27,16 +28,18 @@ export class UsersController {
 
     }//create()
     
-    
+    @UseGuards(JwtAuthGuard) // 👈 This route now requires a valid Bearer token
     @Patch(':id')
     async update(@Param('id') id:string,@Body() body:UpdateUserDto):Promise<user_master | null> {
         return this.userServices.update(Number(id),body);
 
     }//update()
+    @UseGuards(JwtAuthGuard) // 👈 This route now requires a valid Bearer token
     @Patch('changepassword/:id')
     async changePassword(@Param('id') id:string,@Body('oldPassword') oldPassword:string,@Body('newPassword') newPassword:string){
          return this.userServices.changePassword(Number(id),oldPassword,newPassword);
     }//changepassword()
+    @UseGuards(JwtAuthGuard) // 👈 This route now requires a valid Bearer token
     @Delete(':id')
     async delete(@Param('id') _id:string){
         return this.userServices.remove(Number(_id));

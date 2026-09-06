@@ -2,18 +2,19 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TenderMasterService } from './tender-master.service';
 import { CreateTenderMasterDto } from './dto/create-tender-master.dto';
 import { UpdateTenderMasterDto } from './dto/update-tender-master.dto';
+import { TenderMaster } from './entities/tender-master.entity';
 
 @Controller('tender-master')
 export class TenderMasterController {
   constructor(private readonly tenderMasterService: TenderMasterService) {}
 
   @Post()
-  create(@Body() createTenderMasterDto: CreateTenderMasterDto) {
+  create(@Body() createTenderMasterDto: CreateTenderMasterDto):Promise<TenderMaster> {
     return this.tenderMasterService.create(createTenderMasterDto);
   }
 
   @Get()
-  findAll() {
+  findAll():Promise<TenderMaster[]> {
     return this.tenderMasterService.findAll();
   }
 

@@ -1,3 +1,4 @@
+import { CompanyMaster } from "src/masterdatamodules/company-master/entities/company-master.entity";
 import {
     Column,
     CreateDateColumn,
@@ -16,15 +17,15 @@ export class TenderMaster {
     @Column({ unique: true })
     fileNo!:string ;
     @Column()
-    fileNameInHidi!: string;
+    nameInHindi!: string;
     @Column()
-    fileNameInEnglesh!: string;
-    @Column({ type: 'decimal', precision: 9, scale: 2 })
-    fileAmountWithoutGst!: number;
-    @Column({ type: 'decimal', precision: 9, scale: 2 })
-    fileGstAmount!:number ;
-     @Column({ type: 'decimal', precision: 9, scale: 2 })
-    fileTotalAmount!:number ;
+    nameInEnglish!: string;
+    @Column({ type: 'decimal', precision: 14, scale: 2 })
+    amountWithoutGst!: number;
+    @Column({ type: 'decimal', precision: 14, scale: 2 })
+    gstAmount!:number ;
+     @Column({ type: 'decimal', precision: 14, scale: 2 })
+    totalAmount!:number ;
     @Column()
     companyId!:number;  //master
     @Column()
@@ -67,11 +68,11 @@ export class TenderMaster {
     // =======================================================
     @Column()
     companyId!: number; // Stores the numeric ID pointing to CompanyMaster
-
+*/
     @ManyToOne(() => CompanyMaster, { onDelete: "RESTRICT" })
     @JoinColumn({ name: "companyId" }) // Defaults to target "id" column in CompanyMaster
     company!: CompanyMaster;
-*/
+
     // =======================================================
     // TIMESTAMPS and comman fileds
     // =======================================================
