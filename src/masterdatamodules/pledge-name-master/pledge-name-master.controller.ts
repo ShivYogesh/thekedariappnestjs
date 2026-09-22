@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { PledgeNameMasterService } from './pledge-name-master.service';
 import { CreatePledgeNameMasterDto } from './dto/create-pledge-name-master.dto';
 import { UpdatePledgeNameMasterDto } from './dto/update-pledge-name-master.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard) // 👈 This route now requires a valid Bearer token
 @Controller('pledge-name-master')
 export class PledgeNameMasterController {
   constructor(private readonly pledgeNameMasterService: PledgeNameMasterService) {}

@@ -14,12 +14,25 @@ import { CompanyMasterModule } from './masterdatamodules/company-master/company-
 import { DepartmentMasterModule } from './masterdatamodules/department-master/department-master.module';
 import { FundMasterModule } from './masterdatamodules/fund-master/fund-master.module';
 import { TenderGroupMasterModule } from './masterdatamodules/tender-group-master/tender-group-master.module';
+import { TenderSecurityModule } from './tender-security/tender-security.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
+import { TenderSecuritiesModule } from './txnModules/tender-securities/tender-securities.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({
+  imports: [
+    ThrottlerModule.forRoot({     // this is rate Limit
+      throttlers:[
+        {
+        ttl:6000,
+        limit:2,
+      },
+    ]
+    }),
+    ConfigModule.forRoot({
       isGlobal: true, // Makes the ConfigService available everywhere
     }),
-    TypeOrmModule.forRoot({
+    TypeOrmModule.forRoot({     //ORM Tool
       type:'postgres',
       url:process.env.DATABASE_URL,
       autoLoadEntities:true,
@@ -36,8 +49,11 @@ import { TenderGroupMasterModule } from './masterdatamodules/tender-group-master
     DepartmentMasterModule,
     FundMasterModule,
     TenderGroupMasterModule,
-  ],
+    TenderSecurityModule,
+    TenderSecurityModule,
+    TenderSecuritiesModule,
+  ],//end emports
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,{provide:APP_GUARD,useClass:ThrottlerGuard}],
 })
 export class AppModule {}

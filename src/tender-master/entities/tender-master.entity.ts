@@ -18,7 +18,7 @@ export class TenderMaster {
     @PrimaryGeneratedColumn()
     id!: number;
     @Column({ unique: true })
-    fileNo!:string ;
+    fileNo!: string;
     @Column()
     nameInHindi!: string;
     @Column()
@@ -26,19 +26,21 @@ export class TenderMaster {
     @Column({ type: 'decimal', precision: 14, scale: 2 })
     amountWithoutGst!: number;
     @Column({ type: 'decimal', precision: 14, scale: 2 })
-    gstAmount!:number ;
-     @Column({ type: 'decimal', precision: 14, scale: 2 })
-    totalAmount!:number ;
+    gstAmount!: number;
+    @Column({ type: 'decimal', precision: 14, scale: 2 })
+    totalAmount!: number;
     @Column()
-    companyId!:number;  //master
+    companyId!: number;  //master
     @Column({ nullable: true }) // <-- Added nullable: true
-    tenderGroupId!:number | null; // <-- Changed type to allow null
+    groupId!: number ; // <-- Changed type to allow null
     @Column()
-    fundId!:number;    // master
+    fundId!: number;    // master
     @Column()
-    departmentId!:number;    // master
-   
-   
+    departmentId!: number;    // master
+    @Column()
+    filingMode!: string;
+    
+    
     // =======================================================
     // TIMESTAMPS and comman fileds
     // =======================================================
@@ -52,25 +54,21 @@ export class TenderMaster {
     updatedAt!: Date;
     @DeleteDateColumn()
     deletedAt!: Date;
-
     /* **************************************************** */
     /* *******  All Relation  **************************** */
     /* *************************************************** */
-    
     @ManyToOne(() => CompanyMaster, { onDelete: "RESTRICT" })
     @JoinColumn({ name: "companyId" }) // Defaults to target "id" column in CompanyMaster
     company!: CompanyMaster;
-
-     @ManyToOne(() => TenderGroupMaster, { onDelete: "RESTRICT", nullable: true })
+    @ManyToOne(() => TenderGroupMaster, { onDelete: "RESTRICT", nullable: true })
     @JoinColumn({ name: "tenderGroupId" }) // Defaults to target "id" column in CompanyMaster
-    tenderGroup!:  TenderGroupMaster | null; // <-- type to allow null
-
-         @ManyToOne(() => FundMaster, { onDelete: "RESTRICT" })
+    tenderGroup!: TenderGroupMaster | null; // <-- type to allow null
+    @ManyToOne(() => FundMaster, { onDelete: "RESTRICT" })
     @JoinColumn({ name: "fundId" }) // Defaults to target "id" column in CompanyMaster
     fund!: FundMaster;
 
-     @ManyToOne(() => DepartmentMaster, { onDelete: "RESTRICT" })
+    @ManyToOne(() => DepartmentMaster, { onDelete: "RESTRICT" })
     @JoinColumn({ name: "departmentId" }) // Defaults to target "id" column in CompanyMaster
-    department!: DepartmentMaster;    
+    department!: DepartmentMaster;
 
 }

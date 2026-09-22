@@ -17,11 +17,13 @@ export class CreateTenderMasterDto {
     companyId!: number;
     @IsNumber()
     @IsOptional()
-    tenderGroupId!: number;
+    groupId!: number;
     @IsNumber()
     fundId!: number;
     @IsNumber()
     departmentId!: number;
+    @IsOptional()
+    filingMode!:string;
     @IsOptional()
     createdBy?: string;
     @IsOptional()

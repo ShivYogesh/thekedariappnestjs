@@ -2,10 +2,13 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { TypeOrmExceptionFilter } from './filters/typeorm-exception.filter';
+import { HttpLoggingInterceptor } from './core/Interceptors/http-logging/http-logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
    // 👇 ADD THIS LINE RIGHT HERE 👇
+   // Apply the HTTP logger globally
+   app.useGlobalInterceptors(new HttpLoggingInterceptor);
    // Apply the database filter globally
   app.useGlobalFilters(new TypeOrmExceptionFilter());
   app.useGlobalPipes(new ValidationPipe());

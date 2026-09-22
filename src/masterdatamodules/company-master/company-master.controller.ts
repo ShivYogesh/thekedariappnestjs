@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
 import { CompanyMasterService } from './company-master.service';
 import { CreateCompanyMasterDto } from './dto/create-company-master.dto';
 import { UpdateCompanyMasterDto } from './dto/update-company-master.dto';
 import { SearchCompanyMasterDto } from './dto/search-company-master.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
+ @UseGuards(JwtAuthGuard)
 @Controller('company-master')
 export class CompanyMasterController {
   constructor(private readonly companyMasterService: CompanyMasterService) { }

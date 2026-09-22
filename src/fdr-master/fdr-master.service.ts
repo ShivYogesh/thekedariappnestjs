@@ -38,6 +38,28 @@ export class FdrMasterService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} fdrMaster`;
-  }
+    return this.fdrMasterRepository.softDelete(id);
+  }//remove()
+   async getBankWiseReport() {
+    return await this.fdrMasterRepository
+      .createQueryBuilder('fdr')
+      .select('fdr.bankName', 'bankName')
+      .addSelect('COUNT(fdr.id)', 'totalFdrCount')
+      .addSelect('SUM(fdr.depositAmount)', 'totalDepositAmount')
+      .groupBy('fdr.bankName')
+      .orderBy('totalDepositAmount', 'DESC')
+      .getRawMany(); // Use getRawMany() for aggregate queries
+  }//getBankWiseReport()
+async getPledgeWiseReport() {
+    return await this.fdrMasterRepository
+      .createQueryBuilder('fdr')
+      .select('fdr.pledgeName', 'pledgeName')
+      .addSelect('COUNT(fdr.id)', 'totalFdrCount')
+      .addSelect('SUM(fdr.depositAmount)', 'totalDepositAmount')
+      .groupBy('fdr.pledgeName')
+      .orderBy('totalDepositAmount', 'DESC')
+      .getRawMany(); // Use getRawMany() for aggregate queries
+  }//getPledgeWiseReport()
+
+
 }

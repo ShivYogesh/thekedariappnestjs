@@ -7,6 +7,7 @@ import { BankMaster } from 'src/masterdatamodules/bank-master/entities/bank-mast
 import { PledgeNameMaster } from 'src/masterdatamodules/pledge-name-master/entities/pledge-name-master.entity';
 import { CompanyMaster } from 'src/masterdatamodules/company-master/entities/company-master.entity';
 import { FdrStatusMaster } from 'src/masterdatamodules/fdr-status-master/entities/fdr-status-master.entity';
+import { FdrMasterReportControllerController } from './fdr-master-report-controller/fdr-master-report-controller.controller';
 
 @Module({
   imports:[TypeOrmModule.forFeature([
@@ -17,7 +18,7 @@ import { FdrStatusMaster } from 'src/masterdatamodules/fdr-status-master/entitie
     FdrStatusMaster,
     
   ])],
-  controllers: [FdrMasterController],
+  controllers: [FdrMasterController, FdrMasterReportControllerController],
   providers: [FdrMasterService],
   exports:[FdrMasterService],
 })

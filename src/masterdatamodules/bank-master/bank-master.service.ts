@@ -17,11 +17,11 @@ export class BankMasterService {
       throw error;
     }
   }//create()
-  async findAll(): Promise<BankMaster[]> {
-      return await this.bankRepository.find({relations:{fdrs:true}});
+   findAll() {
+        return  this.bankRepository.find({relations:{fdrs:false}});
     }//findAll()
-  async findOne(name: string) {
-    return await this.bankRepository.findOneBy({bankName:name});
+   findOne(name: string) {
+    return  this.bankRepository.findOneBy({bankName:name});
   }
 
   update(id: number, updateBankMasterDto: UpdateBankMasterDto) {

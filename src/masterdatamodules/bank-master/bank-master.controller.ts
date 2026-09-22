@@ -14,6 +14,7 @@ export class BankMasterController {
 
   @Get()
   findAll() {
+   
     return this.bankMasterService.findAll();
   }
 

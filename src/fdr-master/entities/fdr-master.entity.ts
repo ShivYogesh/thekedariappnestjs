@@ -34,31 +34,36 @@ export class FdrMaster {
     @Column()
     pledgeStatus: boolean = false;
     @Column()
+    pledgeName!: string;
+    @Column()
+    bankName!: string;
+    @Column()
+    fdrStatus!: string;
+    @Column()
+    companyId!: number; // Stores the numeric ID pointing to CompanyMaster
+
+    @Column()
     createdBy!: string;
     @Column()
     updatedBy!: string;
     // =======================================================
     // 1. BANK RELATIONSHIP (String Primary Key Match)
     // =======================================================
-    @Column()
-    bankName!: string;
+    
     @ManyToOne(() => BankMaster, { onDelete: "RESTRICT", onUpdate: "CASCADE" })
     @JoinColumn({ name: "bankName", referencedColumnName: "bankName" })
     bank!: BankMaster;
     // =======================================================
     // 1. FDR STATUS RELATIONSHIP (String Primary Key Match)
     // =======================================================
-    @Column()
-    fdrStatus!: string;
+    
     @ManyToOne(() => FdrStatusMaster, { onDelete: "RESTRICT", onUpdate: "CASCADE" })
     @JoinColumn({ name: "fdrStatus", referencedColumnName: "fdrStatusName" })
     status!: FdrStatusMaster;
     // =======================================================
     // 1. BANK RELATIONSHIP (String Primary Key Match)
     // =======================================================
-    @Column()
-    pledgeName!: string;
-
+    
     @ManyToOne(() => PledgeNameMaster, { onDelete: "RESTRICT", onUpdate: "CASCADE" })
     @JoinColumn({ name: "pledgeName", referencedColumnName: "pledgeName" })
     pledgeTo!: PledgeNameMaster;
@@ -66,9 +71,7 @@ export class FdrMaster {
     // =======================================================
     // 2. COMPANY RELATIONSHIP (Auto-generated Numeric ID Match)
     // =======================================================
-    @Column()
-    companyId!: number; // Stores the numeric ID pointing to CompanyMaster
-
+    
     @ManyToOne(() => CompanyMaster, { onDelete: "RESTRICT" })
     @JoinColumn({ name: "companyId" }) // Defaults to target "id" column in CompanyMaster
     company!: CompanyMaster;

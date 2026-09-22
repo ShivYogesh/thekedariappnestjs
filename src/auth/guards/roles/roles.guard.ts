@@ -14,7 +14,6 @@ export class RolesGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
-    console.log(requiredRoles);
     // If no roles are required, allow public access
     if (!requiredRoles) {
       return true;
@@ -22,7 +21,10 @@ export class RolesGuard implements CanActivate {
 
     // 2. Extract the user object from the current execution context
     const { user } = context.switchToHttp().getRequest();
-    console.log(user);
+     // 3. 👑 THE RULE: If the user is a superadmin, bypass all specific role checks
+    if (user.role === Role.SuperAdmin) {
+      return true; 
+    }
     // 3. Match user roles against required roles
     return requiredRoles.some((role) => user?.role?.includes(role));
   }

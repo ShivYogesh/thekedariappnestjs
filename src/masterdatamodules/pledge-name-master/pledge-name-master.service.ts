@@ -21,7 +21,7 @@ export class PledgeNameMasterService {
   }//create()
 
   async findAll():Promise<PledgeNameMaster[]> {
-    return await this.pledgeNameMasterRepository.find({relations:{fdrs:true}});
+    return await this.pledgeNameMasterRepository.find({relations:{fdrs:false}});
   }
 
   findOne(id: number) {
