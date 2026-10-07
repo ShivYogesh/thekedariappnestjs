@@ -41,6 +41,6 @@ export class TenderMasterService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} tenderMaster`;
+    return this.tenderMasterRepository.softDelete(id);// `This action removes a #${id} tenderMaster`;
   }
 }
