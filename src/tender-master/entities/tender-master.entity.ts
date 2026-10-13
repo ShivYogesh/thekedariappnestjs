@@ -61,7 +61,7 @@ export class TenderMaster {
     @JoinColumn({ name: "companyId" }) // Defaults to target "id" column in CompanyMaster
     company!: CompanyMaster;
     @ManyToOne(() => TenderGroupMaster, { onDelete: "RESTRICT", nullable: true })
-    @JoinColumn({ name: "tenderGroupId" }) // Defaults to target "id" column in CompanyMaster
+    @JoinColumn({ name: "groupId" }) // Defaults to target "id" column in CompanyMaster
     tenderGroup!: TenderGroupMaster | null; // <-- type to allow null
     @ManyToOne(() => FundMaster, { onDelete: "RESTRICT" })
     @JoinColumn({ name: "fundId" }) // Defaults to target "id" column in CompanyMaster

@@ -17,6 +17,14 @@ export class TenderMasterController {
   findAll():Promise<TenderMaster[]> {
     return this.tenderMasterService.findAll();
   }
+  @Get('allfileds')
+  getAllTenders(){
+    return this.tenderMasterService.getAllTenders();
+  }
+  @Get('departmentwisereport')
+  async getDepartmentSummaryReport(){
+    return await this.tenderMasterService.getDepartmentSummaryReport();
+  }//getBankWiseReport()
 
   @Get(':id')
   findOne(@Param('id') id: string) {
